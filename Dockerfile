@@ -1,4 +1,4 @@
-FROM python:3.10-slim-buster as base
+FROM python:3.10-slim-buster
 
 WORKDIR /app
 
@@ -8,6 +8,4 @@ RUN pip3 install -r requirements.txt
 
 COPY . .
 
-EXPOSE 5000
-
-CMD ["python3", "manage.py", "runserver"]
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:5000"]
