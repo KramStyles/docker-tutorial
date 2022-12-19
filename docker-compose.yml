@@ -31,6 +31,9 @@ services:
     build:
       context: .
     command: celery --app project worker -l DEBUG
+    volumes:
+      - .:/django_tutorial
+    container_name: celery_tutorial_container
     depends_on:
       - db
       - redis
