@@ -1,40 +1,20 @@
-version: "3.8"
+# This is the syntax of the docker compose we will use.
+# version: '3.9'
+
+# This is the main block. We have app and we want to build our docker file inside our current directory.
+# Adding dev=true to overwrite the DEV in dockerfile.
+# Maps port 8000 from our locak machine to that of our docker container
+# Volumes maps our changes from our local project to the container project
+# Finally the command is what we run the service with. 
 services:
-  redis:
-    image: redis:alpine
-    container_name: redis_alpine
-
-  db:
-    image: postgres
-    volumes:
-    - ./data/db:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    container_name: postgres_db
-
   app:
-    build: .
-    volumes:
-    - .:/django_tutorial
-    ports:
-    - 5000:5000
-    image: app:django_tutorial
-    container_name: docker_container
-    command: python manage.py runserver 0.0.0.0:5000
-    depends_on:
-      - db
-
-  celery:
-    restart: on-failure
     build:
       context: .
-    command: celery --app project worker -l DEBUG
+      args:
+        - DEV=true
+    ports:
+      - "8000:8000"
     volumes:
-      - .:/django_tutorial
-    container_name: celery_tutorial_container
-    depends_on:
-      - db
-      - redis
-      - app
+      - ./:/app
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"

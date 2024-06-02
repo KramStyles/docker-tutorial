@@ -9,10 +9,11 @@ ENV PYTHONUNBUFFERED 1
 
 # Copy our requirements file to a temporary folder
 COPY ./requirements.txt /tmp/requirements.txt
+COPY ./requirements.dev.txt /tmp/requirements.dev.txt
 
 # Copy the project folder to the container and set it as the working directory
-COPY ./project /project
-WORKDIR /project
+COPY ./ /app
+WORKDIR /app
 
 # Expose the port we would run in our browser.
 EXPOSE 8000
@@ -22,9 +23,15 @@ EXPOSE 8000
 # We install the requirements from the temp folder
 # We remove the temporary folder after installation. To keep the container as light as possible.
 # Adding a new user so as not to use the root user.
+# If dev is true, we install the development req file.
+ARG DEV=false
 RUN python -m venv /env && \
     /env/bin/pip install --upgrade pip && \
     /env/bin/pip install -r /tmp/requirements.txt && \
+    if [ $DEV = "true"]; then\
+        echo "DEVELOPMENT MODE: Installing additional libraries..." && \
+        /env/bin/pip install -r /tmp/requirements.dev.txt ; \
+    fi && \
     rm -rf /tmp && \
     adduser \
         --disabled-password \
