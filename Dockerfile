@@ -28,9 +28,10 @@ ARG DEV=false
 RUN python -m venv /env && \
     /env/bin/pip install --upgrade pip && \
     /env/bin/pip install -r /tmp/requirements.txt && \
+    /env/bin/pip install -r /tmp/requirements.dev.txt && \
     if [ $DEV = "true"]; then\
         echo "DEVELOPMENT MODE: Installing additional libraries..." && \
-        /env/bin/pip install -r /tmp/requirements.dev.txt ; \
+        /env/bin/pip install -r /tmp/requirements.dev.txt; \
     fi && \
     rm -rf /tmp && \
     adduser \
