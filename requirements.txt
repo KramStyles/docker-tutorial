@@ -1,8 +1,4 @@
-asgiref==3.5.2
-backports.zoneinfo==0.2.1;python_version<"3.9"
-Django==4.1.4
-psycopg2==2.9.5
-sqlparse==0.4.3
-tzdata==2022.7
-redis>=3.5
-celery>=5.0
+Django>=3.2.4,<3.3
+djangorestframework>=3.12.4,<3.13
+requests
+celery

@@ -131,3 +131,12 @@ dmypy.json
 .vscode/
 .idea/
 data/
+
+
+.git
+.gitignore
+.docker
+project/__pycache__/
+project/*/__pycache__/
+project/*/*/__pycache__/
+project/*/*/*/__pycache__/
