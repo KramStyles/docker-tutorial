@@ -4,7 +4,7 @@ cli:
 
 # Define some example targets that use the cli target
 test:
-	docker-compose run --rm app sh -c "python manage.py test"
+	docker-compose run --rm app sh -c "python manage.py test --verbosity=2"
 
 lint:
 	docker-compose run --rm app sh -c  "flake8"
