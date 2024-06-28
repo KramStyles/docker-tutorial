@@ -6,9 +6,10 @@ from core import sample
 
 # Create your tests here.
 
+
 class TestCalc(SimpleTestCase):
     """Test the Calc function."""
-    
+
     def test_add_numbers(self):
         """Test adding numbers together."""
         res = sample.add(4, 56)
@@ -17,4 +18,4 @@ class TestCalc(SimpleTestCase):
     def test_substract_numbers(self):
         """Test substract numbers."""
         result = sample.substract(10, 20)
-        self.assertEqual(result, 5)
+        self.assertEqual(result, 10)
